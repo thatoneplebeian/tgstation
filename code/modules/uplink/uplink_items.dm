@@ -1271,6 +1271,13 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	surplus = 30
 	illegal_tech = FALSE
 
+/datum/uplink_item/stealthy_tools/quantumbag
+	name = "Bluespace Brothers Pack"
+	desc = "A bag containing two boxes capable of transporting items from one box to another, and a book that teaches the art of bluespace jumping. Useful for Blood Brothers."
+	item = /obj/item/storage/backpack/duffelbag/syndie/quantum
+	cost = 22
+	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
+
 //Space Suits and Hardsuits
 /datum/uplink_item/suits
 	category = "Space Suits"

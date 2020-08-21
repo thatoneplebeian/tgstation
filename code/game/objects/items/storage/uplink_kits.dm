@@ -565,3 +565,42 @@
 /obj/item/storage/box/syndie_kit/signaler/PopulateContents()
 	for(var/i in 1 to 6)
 		new /obj/item/assembly/signaler(src)
+
+/obj/item/storage/box/syndie_kit/quantumbox
+	name = "box"
+	desc = "It's just an ordinary box."
+	icon_state = "box"
+	var/obj/item/storage/box/syndie_kit/quantumbox/paired = null
+
+/obj/item/storage/box/syndie_kit/quantumbox/PopulateContents()
+
+/obj/item/storage/box/syndie_kit/quantumbox/proc/set_pair(var/obj/item/storage/box/syndie_kit/quantumbox/pair)
+	paired = pair
+	pair.paired = src
+
+/obj/item/storage/box/syndie_kit/quantumbox/attack_self(mob/user)
+	if(!contents.len && paired != null && !paired.contents.len)
+		to_chat(user, "<span class='notice'>Nothing happens.")
+		return
+	var/datum/component/storage/interior = src.GetComponent(/datum/component/storage)
+	interior.close_all()
+	var/datum/component/storage/pair_interior = src.paired.GetComponent(/datum/component/storage)
+	pair_interior.close_all()
+	var/list/in_between = list()//magical transport space
+	for (var/obj/O in contents)
+		in_between+=O
+		contents-=O
+	for (var/obj/O in paired.contents)
+		contents+=O
+		paired.contents-=O
+	for (var/obj/O in in_between)
+		paired.contents+=O
+	in_between = null
+	to_chat(user, "<span class='warning'>The contents of [src] swap with its pair!</span>")
+
+
+
+
+
+
+

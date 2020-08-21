@@ -597,6 +597,17 @@
 	new /obj/item/reagent_containers/hypospray/medipen/stimulants(src)
 	new /obj/item/grenade/syndieminibomb(src)
 
+/obj/item/storage/backpack/duffelbag/syndie/quantum
+	desc = "A large duffel bag containing two entangled boxes and a guide to bluespace manipulation."
+
+/obj/item/storage/backpack/duffelbag/syndie/quantum/PopulateContents()
+	var/obj/item/storage/box/syndie_kit/quantumbox/boxA
+	var/obj/item/storage/box/syndie_kit/quantumbox/boxB
+	boxA = new /obj/item/storage/box/syndie_kit/quantumbox(src)
+	boxB = new /obj/item/storage/box/syndie_kit/quantumbox(src)
+	boxA.set_pair(boxB)
+	new /obj/item/book/granter/trauma/bluespace_manual(src)
+
 // For ClownOps.
 /obj/item/storage/backpack/duffelbag/clown/syndie/ComponentInitialize()
 	. = ..()

@@ -430,3 +430,24 @@
 	icon_state = "cooking_learing_sweets"
 	oneuse = FALSE
 	remarks = list("So that is how icing is made!", "Placing fruit on top? How simple...", "Huh layering cake seems harder then this...", "This book smells like candy", "A clown must have made this page, or they forgot to spell check it before printing...", "Wait, a way to cook slime to be safe?")
+
+	///TRAUMAS///
+/obj/item/book/granter/trauma
+	var/datum/brain_trauma/trauma
+	var/traumaname = "big stupid"
+
+/obj/item/book/granter/trauma/on_reading_finished(mob/user)
+	. = ..()
+	if (!istype(user, /mob/living/carbon/human))
+		return
+	var/mob/living/carbon/human/H = user
+	H.gain_trauma(trauma)
+	to_chat(user, "<span class='notice'>Your mind trembles and you gain the ability of [traumaname].</span>")
+
+/obj/item/book/granter/trauma/bluespace_manual
+	name = "Syndicate Bluespace Manual"
+	desc = "A book that will teach you to manipulate the secret passages in your reality. Avoid doctors, who might try and \"save\" you by removing this ability entirely!"
+	trauma = /datum/brain_trauma/special/bluespace_prophet
+	traumaname = "bluespace prophecy"
+	icon_state = "bookcharge"
+	remarks = list("Bluespace...", "Teleportation...", "Certain places have hidden connections!", "Woah, I just spaced out...what was that last sentence?", "Self-induced brain traumas...")
